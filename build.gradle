@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.railconsist'
+version = '2.0.0-RELEASE'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+
+application {
+    mainClass = 'com.railconsist.TrainConsistApplication'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xlint:all']
+}
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'com.railconsist.TrainConsistApplication',
+            'Implementation-Title': 'RailConsist Enterprise',
+            'Implementation-Version': project.version
+        )
+    }
+}
